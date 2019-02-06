@@ -1,29 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 
-function useTimeout(callback, delay) {
-  const savedCallback = useRef()
+function useEventListener(eventName, callback, dependencies) {
+  useEffect(function() {
+    window.addEventListener(eventName, callback)
 
-  // Remember the latest callback.
-  useEffect(
-    () => {
-      savedCallback.current = callback
-    },
-    [callback]
-  )
-
-  // Set up the interval.
-  useEffect(
-    () => {
-      function tick() {
-        savedCallback.current()
-      }
-      if (delay !== null) {
-        let id = setTimeout(tick, delay)
-        return () => clearTimeout(id)
-      }
-    },
-    [delay]
-  )
+    return function cleanup() {
+      return window.removeEventListener(eventName, callback)
+    }
+  }, dependencies)
 }
 
-export default useTimeout
+export default useEventListener

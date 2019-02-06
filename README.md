@@ -3,7 +3,7 @@
   <br><br>
   <b>Declarative React hook for eventListener</b>
   <br><br/>
-  <a href="https://codesandbox.io/s/vqxwwyolxy">Demo on CodeSandbox</a>
+  <a href="https://codesandbox.io/s/nnpjwz4nwl">Demo on CodeSandbox</a>
 </p>
 
 &nbsp;
@@ -21,7 +21,7 @@ npm install use-event-listener
 ```js
 import useEventListener from 'use-event-listener'
 
-function SimpleExample() {
+function Example() {
   const [key, setKey] = useState()
 
   useEventListener('keydown', event => setKey(event.key), [key])
@@ -29,6 +29,8 @@ function SimpleExample() {
   return <div>{key} was pressed</div>
 }
 ```
+
+[Run on CodeSandbox](https://codesandbox.io/s/nnpjwz4nwl)
 
 &nbsp;
 
