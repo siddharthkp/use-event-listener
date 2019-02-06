@@ -11,6 +11,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function useEventListener(eventName, callback, dependencies) {
   (0, _react.useEffect)(function () {
+    if (typeof window === 'undefined') return;
     window.addEventListener(eventName, callback);
     return function cleanup() {
       return window.removeEventListener(eventName, callback);

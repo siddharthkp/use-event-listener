@@ -24,7 +24,11 @@ import useEventListener from 'use-event-listener'
 function Example() {
   const [key, setKey] = useState()
 
-  useEventListener('keydown', event => setKey(event.key), [key])
+  useEventListener(
+    'keydown', // event to listen to
+    event => setKey(event.key), // callback
+    [key] // dependencies for re-applying effect
+  )
 
   return <div>{key} was pressed</div>
 }
