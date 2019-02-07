@@ -1,15 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
-function useEventListener(eventName, callback, dependencies) {
+function useEventListener(eventName, callback) {
+  const savedCallback = useRef()
+
+  useEffect(
+    () => {
+      savedCallback.current = callback
+    },
+    [callback]
+  )
+
   useEffect(function() {
     if (typeof window === 'undefined') return
 
-    window.addEventListener(eventName, callback)
+    const eventListener = event => savedCallback.current(event)
+
+    window.addEventListener(eventName, eventListener)
 
     return function cleanup() {
-      return window.removeEventListener(eventName, callback)
+      return window.removeEventListener(eventName, eventListener)
     }
-  }, dependencies)
+  }, eventName)
 }
 
 export default useEventListener
