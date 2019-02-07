@@ -26,8 +26,7 @@ function Example() {
 
   useEventListener(
     'keydown', // event to listen to
-    event => setKey(event.key), // callback
-    [key] // dependencies for re-applying effect
+    event => setKey(event.key) // callback
   )
 
   return <div>{key} was pressed</div>
