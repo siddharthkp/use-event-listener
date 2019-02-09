@@ -20,7 +20,7 @@ function useEventListener(eventName, callback, element = window) {
     return function cleanup() {
       return element.removeEventListener(eventName, eventListener)
     }
-  }, [eventName])
+  }, [eventName, savedCallback])
 }
 
 export default useEventListener
