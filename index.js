@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 
-function useEventListener(eventName, callback) {
+function useEventListener(eventName, callback, element = window) {
   const savedCallback = useRef()
 
   useEffect(
@@ -11,16 +11,16 @@ function useEventListener(eventName, callback) {
   )
 
   useEffect(function() {
-    if (typeof window === 'undefined') return
+    if (typeof element === 'undefined') return
 
     const eventListener = event => savedCallback.current(event)
 
-    window.addEventListener(eventName, eventListener)
+    element.addEventListener(eventName, eventListener)
 
     return function cleanup() {
-      return window.removeEventListener(eventName, eventListener)
+      return element.removeEventListener(eventName, eventListener)
     }
-  }, eventName)
+  }, [eventName])
 }
 
 export default useEventListener
