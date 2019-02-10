@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 
-function useEventListener(eventName, callback, element = window) {
+function useEventListener(eventName, callback, element = global) {
   const savedCallback = useRef()
 
   useEffect(
